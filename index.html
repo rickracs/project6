@@ -11,39 +11,40 @@
 
 
   <div class="keys">
-    <div data-key="65" class="key">
+    <div data-key="65" class="key" onclick="playSoundClick(this);">
+
       <kbd>A</kbd>
       <span class="sound">clap</span>
     </div>
-    <div data-key="83" class="key">
+    <div data-key="83" class="key" onclick="playSoundClick(this);">
       <kbd>S</kbd>
       <span class="sound">hihat</span>
     </div>
-    <div data-key="68" class="key">
+    <div data-key="68" class="key" onclick="playSoundClick(this);">
       <kbd>D</kbd>
       <span class="sound">kick</span>
     </div>
-    <div data-key="70" class="key">
+    <div data-key="70" class="key" onclick="playSoundClick(this);">
       <kbd>F</kbd>
       <span class="sound">openhat</span>
     </div>
-    <div data-key="71" class="key">
+    <div data-key="71" class="key" onclick="playSoundClick(this);">
       <kbd>G</kbd>
       <span class="sound">boom</span>
     </div>
-    <div data-key="72" class="key">
+    <div data-key="72" class="key" onclick="playSoundClick(this);">
       <kbd>H</kbd>
       <span class="sound">ride</span>
     </div>
-    <div data-key="74" class="key">
+    <div data-key="74" class="key" onclick="playSoundClick(this);">
       <kbd>J</kbd>
       <span class="sound">snare</span>
     </div>
-    <div data-key="75" class="key">
+    <div data-key="75" class="key" onclick="playSoundClick(this);">
       <kbd>K</kbd>
       <span class="sound">tom</span>
     </div>
-    <div data-key="76" class="key">
+    <div data-key="76" class="key" onclick="playSoundClick(this);">
       <kbd>L</kbd>
       <span class="sound">tink</span>
     </div>
@@ -68,8 +69,19 @@
       audio.currentTime = 0;
       audio.play();
       key.classList.add("playing");
+    
 
     }
+
+    function playSoundClick(x) {
+      const audio2 = document.querySelector(`audio[data-key="${x.outerHTML.slice(15,17)}"]`);
+      const key2 = document.querySelector(`.key[data-key="${x.outerHTML.slice(15,17)}"]`);
+      if (!audio2) return;
+      audio2.currentTime = 0;
+      audio2.play();
+      key2.classList.add("playing");
+    }
+
     function removeTransition(e) {
       if (e.propertyName !== "transform") return;
       this.classList.remove("playing");
@@ -79,6 +91,7 @@
     const keys = document.querySelectorAll(".key");
     keys.forEach(key => key.addEventListener("transitionend", removeTransition));
     window.addEventListener("keydown", playSound);
+  
 
   </script>
 
